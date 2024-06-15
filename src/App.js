@@ -1,4 +1,4 @@
-import React from 'react';
+// CSS
 import './App.css';
 import StartScreen from './components/StartScreen';
 
