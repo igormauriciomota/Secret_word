@@ -1,7 +1,7 @@
 // CSS
 import './App.css';
 
-// React
+// Reactimport { useCallback, useEffect, useState } from 'react';
 import { useState } from 'react';
 
 // data
@@ -20,11 +20,37 @@ const stages = [
 ];
 
 function App() {
+
   const [gameStage, setGameStage] = useState(stages[0].name);
   const [words] = useState(wordsList);
+
+  //Escolhendo as palavras iniciais do project
+  const [pickedWord, setPickedWord] = useState("");
+  const [pickedCategory, setPickedCategory] = useState("");
+  const [letters, setLetters] = useState([]);
+
+  const pickWordAndCategory = () => {
+    const categories = Object.keys(words)
+    const category =
+      categories[Math.floor(Math.random() * Object.keys(categories).length)];
+
+      console.log(category);
+      // pick a random word
+      const word = words[category][Math.floor(Math.random() * words[category].length)];
+
+      console.log(word);
+
+      return {word, category};
+  };
   
-  // Funcção Iniciar
+  // starts the secret word game
   const startGame = () => {
+    //pick word and pick category
+    const { word, category } = pickWordAndCategory();
+
+    console.log(word, category);
+
+
     setGameStage(stages[1].name);
   };
 
@@ -40,10 +66,13 @@ function App() {
 
   return (
     <div className="App">
+      {/* Inicio */}
+
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
       {gameStage === 'game' && <Game verifyLetter={verifyLetter} />}
       {gameStage === 'end' && <GameOver retry={retry} />}
 
+      {/* Fim */}
     </div>
   );
 }
