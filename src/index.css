@@ -8,14 +8,14 @@ body {
   padding: 0;
   background: linear-gradient(
     180deg,
-    rgba(9, 35, 175, 1) 0%,
-    rgba(0, 0, 0, 1) 100%
+    rgb(90, 106, 194) 0%,
+    rgb(47, 37, 37) 100%
     );
     color: #fff;
 }
 
 button {
-  background: #1646a0;
+  background: #18315f;
   color: #fff;
   padding: 0 45px;
   border-radius: 25px;
@@ -29,5 +29,5 @@ button {
 }
 
 button:hover {
-  background-color: #0923af;
+  background-color: #ba1237;
 }
