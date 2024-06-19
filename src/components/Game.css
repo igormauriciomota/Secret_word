@@ -16,9 +16,8 @@
     padding: 1.5em;
     border: 20px solid #ecfa00;
     display: flex;
-    justify-items: center;
-    align-items: center;
-    text-align: center;
+    justify-content: center;
+
 }
 
 .letter, .blankSquare {
