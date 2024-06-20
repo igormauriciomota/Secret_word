@@ -2,7 +2,7 @@
 import './App.css';
 
 // Reactimport { useCallback, useEffect, useState } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // data
 import { wordsList } from './data/words';
@@ -19,6 +19,9 @@ const stages = [
   {id: 3, name: "end" },
 ];
 
+// Quantidades de erros
+//const guessesQty = 5
+
 function App() {
 
   const [gameStage, setGameStage] = useState(stages[0].name);
@@ -31,6 +34,7 @@ function App() {
 
   const [guessedLetters, setGuessedLetters] = useState([])
   const [wrongLetters, setWrongLetters] = useState([])
+  // Quantidades de erros
   const [guesses, setGuesses] = useState(5)
   const [score, setScore] = useState(0)
 
@@ -96,24 +100,46 @@ function App() {
       setGuessedLetters((actualGuessedLetters) => [
         ...actualGuessedLetters,
         normalizedLetter
-      ])
+      ]);
     } else {
       setWrongLetters((actualWrongLetters) => [
         ...actualWrongLetters,
         normalizedLetter
-      ])
+      ]);
+
+      setGuesses((actualGuesses) => actualGuesses - 1);
     }
-
-    console.log(guessedLetters);
-    console.log(wrongLetters);
-
   };
+  
+  console.log(wrongLetters);
 
-  // restarts the game / reinicia o jogo
-
+  // restart the game - reinicia o jogo reset
   const retry = () => {
+    setScore(0);
+    setGuesses(5);
     setGameStage(stages[0].name);
   };
+
+   // clear letters state
+  const clearLetterStates = () => {
+    setGuessedLetters([])
+    setWrongLetters([])
+  };
+
+  // check if guesses ended- useEffect --Pode Monitorar algun dado--
+  useEffect(() => {
+
+    console.log(guessedLetters);
+
+    if(guesses <= 0) {
+      //reset all state
+      clearLetterStates();
+
+      setGameStage(stages[2].name);
+    }
+
+  }, [guesses]);
+
 
   return (
     <div className="App">
