@@ -49,8 +49,10 @@ function App() {
   };
   
   // starts the secret word game
+  //inicia o jogo de palavras secretas
   const startGame = () => {
-    //pick word and pick category
+
+    //pick word and pick category / escolha a palavra e escolha a categoria
     const { word, category } = pickWordAndCategory();
 
     // create an array of letters
@@ -69,14 +71,46 @@ function App() {
 
 
     setGameStage(stages[1].name);
+
   };
 
   // process the letter input
+  // processar a entrada da letra
+
   const verifyLetter = (letter) => {
-    console.log(letter);
+      
+      const normalizedLetter = letter.toLowerCase();
+
+      // check if letter has alteready been used
+      // verifique se a letra já foi utilizada
+      if (
+      guessedLetters.includes(normalizedLetter) ||
+      wrongLetters.includes(normalizedLetter)
+      ) {
+        return;
+    }
+
+    // push guessed letter or remove a guess
+    // empurre a letra adivinhada ou remova um palpite
+    if (letters.includes(normalizedLetter)) {
+      setGuessedLetters((actualGuessedLetters) => [
+        ...actualGuessedLetters,
+        normalizedLetter
+      ])
+    } else {
+      setWrongLetters((actualWrongLetters) => [
+        ...actualWrongLetters,
+        normalizedLetter
+      ])
+    }
+
+    console.log(guessedLetters);
+    console.log(wrongLetters);
+
   };
 
-  // restarts the game
+  // restarts the game / reinicia o jogo
+
   const retry = () => {
     setGameStage(stages[0].name);
   };
